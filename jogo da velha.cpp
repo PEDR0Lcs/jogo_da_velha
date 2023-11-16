@@ -1,8 +1,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <locale.h>
-
-// Função para exibir o tabuleiro
+#define size 9
+// FunÃ§Ã£o para exibir o tabuleiro
 void exibirTabuleiro(char* tabuleiro) {
     printf("  0 1 2\n");
     for (int i = 0; i < 3; i++) {
@@ -15,7 +15,7 @@ void exibirTabuleiro(char* tabuleiro) {
     printf("\n");
 }
 
-// Função para verificar se alguém ganhou
+// FunÃ§Ã£o para verificar se alguÃ©m ganhou
 int verificarGanhador(char* tabuleiro, char jogador) {
     for (int i = 0; i < 3; i++) {
         if ((*(tabuleiro + i * 3) == jogador && *(tabuleiro + i * 3 + 1) == jogador && *(tabuleiro + i * 3 + 2) == jogador) ||
@@ -29,23 +29,23 @@ int verificarGanhador(char* tabuleiro, char jogador) {
         return 1; // Ganhou
     }
 
-    return 0; // Não ganhou
+    return 0; // NÃ£o ganhou
 }
 
-// Função para verificar se o tabuleiro está cheio (empate)
+// FunÃ§Ã£o para verificar se o tabuleiro estÃ¡ cheio (empate)
 int tabuleiroCheio(char* tabuleiro) {
-    for (int i = 0; i < 9; i++) {
+    for (int i = 0; i < size ; i++) {
         if (*(tabuleiro + i) == ' ')
-            return 0; // Não está cheio
+            return 0; // NÃ£o estÃ¡ cheio
     }
-    return 1; // Está cheio
+    return 1; // EstÃ¡ cheio
 }
 
 int main() {
 	setlocale(0, "Portuguese");
 	
     char* tabuleiro = (char*)malloc(9 * sizeof(char));
-    for (int i = 0; i < 9; i++) {
+    for (int i = 0; i < size; i++) {
         *(tabuleiro + i) = ' ';
     }
 
@@ -57,12 +57,12 @@ int main() {
 
         // Obter a jogada do jogador
         int linha, coluna;
-        printf("Jogador %c, faça sua jogada (linha e coluna): ", jogadorAtual);
+        printf("Jogador %c, faÃ§a sua jogada (linha e coluna): ", jogadorAtual);
         scanf("%d %d", &linha, &coluna);
 
-        // Verificar se a posição é válida
+        // Verificar se a posiÃ§Ã£o Ã© vÃ¡lida
         if (linha < 0 || linha >= 3 || coluna < 0 || coluna >= 3 || *(tabuleiro + linha * 3 + coluna) != ' ') {
-            printf("Jogada inválida. Tente novamente.\n");
+            printf("Jogada invÃ¡lida. Tente novamente.\n");
             continue;
         }
 
@@ -72,7 +72,7 @@ int main() {
         // Verificar se o jogador venceu
         if (verificarGanhador(tabuleiro, jogadorAtual)) {
             exibirTabuleiro(tabuleiro);
-            printf("Parabéns, jogador %c! Você venceu!\n", jogadorAtual);
+            printf("ParabÃ©ns, jogador %c! VocÃª venceu!\n", jogadorAtual);
             break;
         }
 
@@ -87,7 +87,7 @@ int main() {
         jogadorAtual = (jogadorAtual == 'X') ? 'O' : 'X';
     }
 
-    free(tabuleiro); // Liberar a memória alocada dinamicamente
+    free(tabuleiro); // Liberar a memÃ³ria alocada dinamicamente
 
     return 0;
 }
