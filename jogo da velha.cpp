@@ -44,7 +44,7 @@ int tabuleiroCheio(char* tabuleiro) {
 int main() {
 	setlocale(0, "Portuguese");
 	
-    char* tabuleiro = (char*)malloc(9 * sizeof(char));
+    char* tabuleiro = (char*)malloc(size * sizeof(char));
     for (int i = 0; i < size; i++) {
         *(tabuleiro + i) = ' ';
     }
